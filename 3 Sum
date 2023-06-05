@@ -4,13 +4,14 @@ public:
         sort(nums.begin(),nums.end());
         int n=nums.size();
         vector<vector<int>>ans;
+        map<vector<int>,int>m;
         for(int i=n-1;i>=2;i--){
             int low=0;
             int high=i-1;
             while(low<high){
                 if(nums[i]+nums[low]+nums[high]==0){
-                    ans.push_back({nums[low],nums[high],nums[i]});
-                    i++;
+                    m.insert({{nums[low],nums[high],nums[i]},1});
+                    low++;
                     high--;
                 }
                 else if(nums[i]+nums[low]+nums[high]>0){
@@ -19,6 +20,9 @@ public:
                 else
                     low++;
             }
+        }
+        for(auto it:m){
+            ans.push_back(it.first);
         }
         return ans;
     }
