@@ -1,0 +1,32 @@
+#include <bits/stdc++.h>
+
+bool check(int node,int c,vector<int>&color,vector<vector<int>>&mat){
+    for(int i=0;i<mat.size();i++){
+        if(mat[node][i]==1 ){
+            if(color[i]==c)
+               return false;
+        }
+    }
+    return true;
+}
+bool solve(vector<vector<int>>&mat,int node,int m,vector<int>&color){
+    if(node==mat.size())
+        return true;
+    for(int i=1;i<=m;i++){
+        if(check(node,i,color,mat)){
+            color[node]=i;
+            if(solve(mat,node+1,m,color))
+                return true;
+            color[node]=0;
+        }   
+    }
+    return false;
+} 
+string graphColoring(vector<vector<int>> &mat, int m) {
+    // Write your code here
+    int n=mat.size();
+    vector<int>color(n+1,0);
+    if(solve(mat,0,m,color))
+        return "YES";
+    return "NO";
+}
