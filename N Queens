@@ -1,0 +1,52 @@
+bool check(vector<int>&board,int row,int col,int n){
+    int og=row*n+col;
+    for(int i=row-1;i>=0;i--){
+        int placed=i*n+col;
+        if(board[placed]==1){
+            return false;
+        }
+    }
+    int x=row-1,y=col-1;
+    while(x>=0 && y>=0){
+        int placed=x*n+y;
+        if(board[placed]==1){
+            return false;
+        }
+        x--;
+        y--;
+    }
+    x=row-1;
+    y=col+1;
+    while(x>=0 && y<n){
+        int placed=x*n+y;
+        if(board[placed]==1){
+            return false;
+        }
+        x--;
+        y++;
+    }
+    return true;
+}
+void generate(vector<vector<int>>&ans,vector<int>&board,int n,int row){
+    if(row==n){
+        ans.push_back(board);
+    }
+    for(int i=0;i<n;i++){
+        if(board[row*n+i]==0){
+            if(check(board,row,i,n)){
+                board[row*n+i]=1;
+                generate(ans,board,n,row+1);
+            }
+            board[row*n+i]=0;
+        }
+    }
+    return;
+}
+
+vector<vector<int>> solveNQueens(int n) {
+    // Write your code here.
+    vector<int>board(n*n,0);
+    vector<vector<int>>ans;
+    generate(ans,board,n,0);
+    return ans;
+}
