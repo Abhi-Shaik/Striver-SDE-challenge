@@ -1,0 +1,29 @@
+#include <bits/stdc++.h> 
+bool check(vector<int>&position,int val,int c){
+	int ply=1;
+	int prev=position[0];
+	for(int i=1;i<position.size();i++){
+		if(position[i]-prev>=val){
+			prev=position[i];
+			ply++;
+		}
+	}
+	return ply>=c;
+}
+int chessTournament(vector<int> position , int n ,  int c){
+	// Write your code here
+	sort(position.begin(),position.end()); 
+	int focus=0;
+	int low=1;
+	int high=position[n-1]-position[0];
+	while(low<=high){
+		int mid=low+(high-low)/2;
+		if(check(position,mid,c)){
+			focus=mid;
+			low=mid+1;
+		}
+		else
+			high=mid-1;
+	}
+	return focus;
+}
