@@ -1,0 +1,23 @@
+string reverseString(string &str){
+	// Write your code here.
+	// string ans="";
+	int n=str.size();
+	vector<string>v;
+	for(int i=0;i<n;i++){
+		string temp="";
+		while(str[i]!=' ' && i<n){
+			temp.push_back(str[i]);
+			i++;
+		}
+		if(temp.size()!=0)
+			v.push_back(temp);
+	}
+	int m=v.size();
+	string ans="";
+	for(int i=m-1;i>=0;i--){
+		ans+=v[i];
+		ans+=" ";
+	}	
+	ans.pop_back();
+	return ans;
+}
