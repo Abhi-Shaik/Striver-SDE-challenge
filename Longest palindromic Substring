@@ -1,0 +1,31 @@
+int check(string &s,int low,int high){
+    while(low>=0 && high<s.size()){
+        if(s[low]==s[high]){
+            low--;
+            high++;
+        }
+        else
+            break;
+    }
+    return high-low-1;
+}
+string longestPalinSubstring(string s)
+{
+    // Write your code here.
+    int n=s.size();
+    int maxlen=0;
+    int start=-1;
+    for(int i=0;i<n;i++){
+        int len1=check(s,i-1,i+1);
+        int len2=check(s,i,i+1);
+        if(maxlen<len1 || maxlen<len2){
+            maxlen=max(len1,len2);
+            if(len1<len2){
+                start=i+1-len2/2;;
+            }
+            else    
+                start=i-len1/2;
+        }
+    }
+    return s.substr(start,maxlen);
+};
