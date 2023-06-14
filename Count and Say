@@ -1,0 +1,19 @@
+#include <bits/stdc++.h> 
+string writeAsYouSpeak(int n) 
+{
+	string s="1";
+	for(int i=1;i<n;i++){
+		string temp="";
+		int cnt=1;
+		for(int j=0;j<s.size();j++){
+			if(s[j]==s[j+1])
+				cnt++;
+			else{
+				temp+=to_string(cnt)+s[j];
+				cnt=1;
+			}
+		}
+		s=temp;
+	}
+	return s;	
+}
