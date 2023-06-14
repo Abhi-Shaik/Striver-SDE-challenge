@@ -1,0 +1,16 @@
+#include <bits/stdc++.h> 
+bool areAnagram(string &str1, string &str2){
+    // Write your code here.
+    vector<char>v(26,0);
+    if(str1.size()!=str2.size())
+        return false;
+    for(int i=0;i<str1.size();i++){
+        v[str1[i]-'a']++;
+        v[str2[i]-'a']--;
+    }
+    for(int i=0;i<str1.size();i++){
+        if(v[i]!=0)
+            return false;
+    }
+    return true;
+}
