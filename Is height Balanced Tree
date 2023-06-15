@@ -1,0 +1,19 @@
+#include <bits/stdc++.h> 
+
+int height(BinaryTreeNode<int> *root,bool &ans){
+    if(!root || !ans)
+        return 0;
+    int l=height(root->left,ans);
+    int r=height(root->right,ans);
+    if(abs(l-r)>=2)
+        ans=false;
+    return max(l,r)+1;
+}
+bool isBalancedBT(BinaryTreeNode<int>* root) {
+    // Write your code here.
+    if(!root)
+        return true;
+    bool ans=true;
+    height(root,ans);
+    return ans;
+}
