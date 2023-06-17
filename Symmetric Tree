@@ -1,0 +1,20 @@
+
+bool fn(BinaryTreeNode<int>*lt,BinaryTreeNode<int>*rt){
+    if(!lt && !rt)
+        return true;
+    else if(lt && rt){
+        if(lt->data==rt->data)
+            return fn(lt->left,rt->right) && fn(lt->right,rt->left);
+        else 
+            return false;
+    }
+    else    
+        return false;
+}
+bool isSymmetric(BinaryTreeNode<int>* root)
+{
+    // Write your code here.    
+    if(!root)   
+        return true;
+    return fn(root->left,root->right);
+}
