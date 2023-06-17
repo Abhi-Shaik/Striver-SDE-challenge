@@ -1,0 +1,29 @@
+#include <bits/stdc++.h> 
+void connectNodes(BinaryTreeNode< int > *root) {
+    // Write your code here.
+    if(!root)
+        return;
+    queue<BinaryTreeNode<int>*>q;
+    q.push(root);
+    while(!q.empty()){
+        int n=q.size();
+        BinaryTreeNode<int>*temp=q.front();
+        q.pop();
+        if(temp->left)
+            q.push(temp->left);
+        if(temp->right)
+            q.push(temp->right);
+        for(int i=1;i<n;i++){
+            BinaryTreeNode<int>*front=q.front();
+            q.pop();
+            temp->next=front;
+            temp=front;
+            if(front->left)
+                q.push(front->left);
+            if(front->right)
+                q.push(front->right);
+        }
+        temp->next=NULL;
+    }
+    return;
+}
