@@ -1,0 +1,18 @@
+#include <bits/stdc++.h> 
+
+void helper(TreeNode<int>*root,TreeNode<int>* &head){
+    if(!root)
+        return;
+    helper(root->right,head);
+    helper(root->left,head);
+    root->left=nullptr;
+    root->right=head;
+    head=root;
+}
+TreeNode<int> *flattenBinaryTree(TreeNode<int> *root)
+{
+    // Write your code here.
+    TreeNode<int>*head=NULL;
+    helper(root,head);
+    return head;
+}
