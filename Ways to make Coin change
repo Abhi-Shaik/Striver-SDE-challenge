@@ -1,0 +1,24 @@
+#include<vector>
+
+long solve(int *arr,int idx,int value,vector<vector<long>>&dp){
+    if(idx==0){
+        if(value%arr[0]==0){
+            return 1;
+        }
+        return 0;
+    }
+    if(dp[idx][value]!=-1)
+        return dp[idx][value];
+    long take=0;
+    if(arr[idx]<=value){
+        take=solve(arr,idx,value-arr[idx],dp);
+    }
+    long not_take=solve(arr,idx-1,value,dp);
+    return dp[idx][value]=take+not_take;
+}
+long countWaysToMakeChange(int *denominations, int n, int value)
+{
+    //Write your code here
+    vector<vector<long>>dp(n,vector<long>(value+1,-1));
+    return solve(denominations,n-1,value,dp);
+}
