@@ -1,0 +1,19 @@
+#include <bits/stdc++.h> 
+
+TreeNode<int>* make(vector<int>&preorder,int mini,int maxi,int &idx){
+    // cout<<idx<<" ";
+    if(idx>=preorder.size())
+        return NULL;
+    if(preorder[idx]<mini || preorder[idx]>maxi)
+        return NULL;
+    TreeNode<int>* root=new TreeNode<int>(preorder[idx]);
+    idx++;
+    root->left=make(preorder,mini,root->data,idx);
+    root->right=make(preorder,root->data,maxi,idx);
+    return root;
+}
+TreeNode<int>* preOrderTree(vector<int> &preorder){
+    // Write your code here.
+    int idx=0;  
+    return make(preorder,0,INT_MAX,idx);
+}
