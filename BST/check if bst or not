@@ -1,0 +1,14 @@
+bool solve(BinaryTreeNode<int>*root,int mini,int maxi){
+    if(!root)
+        return true;
+    if(root->data< mini || root->data >maxi)
+        return false;
+    bool a=solve(root->left,mini,root->data);
+    bool b=solve(root->right,root->data,maxi);
+    return a&b;
+}
+
+bool validateBST(BinaryTreeNode<int> *root) {
+    // Write your code here
+    return solve(root,INT_MIN,INT_MAX);
+}
