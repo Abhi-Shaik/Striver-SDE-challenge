@@ -1,0 +1,27 @@
+#include <bits/stdc++.h> 
+
+pair<int,int> predecessorSuccessor(BinaryTreeNode<int>* root, int key)
+{
+    // Write your code here.
+    BinaryTreeNode<int>*r=root;
+    int suc=-1;
+    while(r){
+        if(key>=r->data)
+            r=r->right;
+        else{
+            suc=r->data;
+            r=r->left;
+        }
+    }
+    int pre=-1;
+    r=root;
+    while(r){
+        if(key<=r->data)
+            r=r->left;
+        else{
+            pre=r->data;
+            r=r->right;
+        }
+    }
+    return {pre,suc};
+}
