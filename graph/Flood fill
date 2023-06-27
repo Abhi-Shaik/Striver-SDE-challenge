@@ -1,0 +1,21 @@
+void dfs(vector<vector<int>>&grid,int row,int col,int newcolor,int curr){
+    grid[row][col]=newcolor;
+    int dr[]={1,0,-1,0};
+    int dc[]={0,1,0,-1};
+    for(int i=0;i<4;i++){
+        int nr=row+dr[i];
+        int nc=col+dc[i];
+        if(nr>=0 && nc>=0 && nr<grid.size() && nc<grid[0].size() && grid[nr][nc]==curr){
+            dfs(grid,nr,nc,newcolor,curr);
+        }
+    }
+    return ;
+}
+vector<vector<int>> floodFill(vector<vector<int>> &image, int x, int y, int newColor)
+{
+    // Write your code here.
+    if(newColor==image[x][y])
+        return image;
+    dfs(image,x,y,newColor,image[x][y]);
+    return image;
+}
