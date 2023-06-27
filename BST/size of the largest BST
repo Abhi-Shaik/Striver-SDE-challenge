@@ -1,0 +1,34 @@
+#include <bits/stdc++.h> 
+
+class info{
+    public:
+        bool isBST;
+        int cnt;
+        int maxi;
+        int mini;
+};
+info solve(TreeNode<int>*root,int &ans){
+    if(!root)
+        return {true,0,INT_MIN,INT_MAX};
+    
+    info l=solve(root->left,ans);
+    info r=solve(root->right,ans);
+    info curr;
+    curr.mini=min(l.mini,root->data);
+    curr.maxi=max(r.maxi,root->data);
+    curr.cnt=l.cnt+r.cnt+1;
+    if(l.isBST && r.isBST && (l.maxi<root->data && r.mini>root->data)){
+        curr.isBST=true;
+        ans=max(ans,curr.cnt);
+    }
+    else    
+        curr.isBST=false;
+    return curr;
+}
+int largestBST(TreeNode<int>* root) 
+{
+    // Write your code here.
+    int ans=0;
+    solve(root,ans);
+    return ans;
+}
