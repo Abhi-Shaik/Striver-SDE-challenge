@@ -1,0 +1,16 @@
+#include <bits/stdc++.h> 
+int kthLargest(vector<int>& nums, int size, int k)
+{
+	// Write your code here.
+	priority_queue<int,vector<int>,greater<int>>pq;
+	for(int i=0;i<size;i++){
+		if(pq.size()<k){
+			pq.push(nums[i]);
+		}
+		else{
+			pq.push(nums[i]);
+			pq.pop();
+		}
+	}
+	return pq.top();
+}
